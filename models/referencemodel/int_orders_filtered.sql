@@ -1,15 +1,15 @@
 {{
-    config(materialized = 'ephemeral')
+config(materialized = 'ephemeral')
 }}
 
-Select order_id,
-Customer_id,
-Order_date,
-Amount,
-Case when amount>= '100' then 'high'
-When amount>= '50' then 'medium'
-Else 'low'
-End as order_tier
+select order_id,
+customer_id,
+order_date,
+amount,
+case when amount >='100' then 'high'
+when amount >= '50' then 'medium'
+else 'low'
+end as order_tier
 
-From {{ref('stg_orders')}}
-Where status!='returned'
+from {{ref('stg_orders')}}
+where status!='returned'

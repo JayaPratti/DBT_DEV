@@ -1,10 +1,10 @@
-{{config(materialized = 'view')
-}}
+{{ config(materialized='view') }}
 
-Select id as  order_id,
-Customer_id,
-Order_date,
-status,
-Amount
-From {{source('jaffle_shop','orders')}}
-Where status!='returned'
+select
+    id              as order_id,
+    customer_id,
+    order_date,
+    status,
+    amount
+from {{ source('jaffle_shop', 'orders') }}
+where status != 'returned'
