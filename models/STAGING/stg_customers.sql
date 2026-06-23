@@ -1,0 +1,1 @@
+select * from DEV_ANALYTICS.DBT_JPRATTI.stg_customers

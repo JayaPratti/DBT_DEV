@@ -1,0 +1,15 @@
+Version: 2
+
+Sources:
+    -	name: raw
+    -	database: RAW
+    -	schema: JAFFLE_SHOP
+    -	tables: 
+        - name: CUSTOMERS
+        - name: ORDERS
+
+    -	name: STRIPE
+    -	database: RAW
+    -	schema: stripe
+    -	tables: 
+        - name: PAYEMENT
