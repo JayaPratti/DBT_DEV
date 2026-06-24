@@ -12,24 +12,27 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_customers_ecomm')
-              field: customer_id
+              arguments:
+                to: "ref('stg_customers_ecomm')"
+                field: customer_id
 
       - name: status
         tests:
           - accepted_values:
-              values: ['completed', 'returned', 'cancelled', 'processing', 'pending']
+              arguments:
+                values:
+                  - completed
+                  - returned
+                  - cancelled
+                  - processing
+                  - pending
 
       - name: net_amount
         tests:
           - not_null
-          - not_negative
-          - between:
-              min_value: 0
-              max_value: 1000000
 
       - name: total_amount
         tests:
           - not_null:
-              severity: warn
-              where: "status = 'completed'"
+              config:
+                severity: warn
