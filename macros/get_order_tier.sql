@@ -4,4 +4,4 @@
         when {{amount_col}} >= 2000 then 'medium'
             else                         'low'
         end
-{% endmacro %}            
+{% endmacro %} 
