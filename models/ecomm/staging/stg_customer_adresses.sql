@@ -3,7 +3,7 @@
 select
     address_id,
     customer_id,
-    ddress_type,
+    address_type,
     street,
     city,
     state,
