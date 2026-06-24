@@ -1,5 +1,5 @@
 version: 2
-
+ 
 models:
   - name: stg_orders_ecomm
     columns:
@@ -7,7 +7,7 @@ models:
         tests:
           - not_null
           - unique
-
+ 
       - name: customer_id
         tests:
           - not_null
@@ -15,7 +15,7 @@ models:
               arguments:
                 to: "ref('stg_customers_ecomm')"
                 field: customer_id
-
+ 
       - name: status
         tests:
           - accepted_values:
@@ -26,11 +26,11 @@ models:
                   - cancelled
                   - processing
                   - pending
-
+ 
       - name: net_amount
         tests:
           - not_null
-
+ 
       - name: total_amount
         tests:
           - not_null:
