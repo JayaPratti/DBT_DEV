@@ -21,5 +21,5 @@ select
         else                             'bronze'
     end                                  as customer_tier,
     datediff('day', co.last_order_date,
-        current_date)                    as days_since_last_order
-from {{ ref('int_customer_orders') }} co
+        current_date())                    as days_since_last_order
+from {{ ref('int_customer_orders') }} as co
