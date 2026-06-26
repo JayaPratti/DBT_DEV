@@ -5,6 +5,8 @@
     ) 
 }} 
 
+
+
 select 
     i.product_id, 
     i.warehouse_id, 
@@ -17,15 +19,19 @@ select
     i.stock_status, 
     i.last_updated, 
     current_timestamp                   as snapshot_at 
-from {{ ref('stg_inventory') }} i 
-join {{ ref('stg_warehouses') }} w 
+from {{ ref('stg_inventory') }} as i 
+inner join {{ ref('stg_warehouses') }} as w 
     on i.warehouse_id = w.warehouse_id 
-join {{ ref('stg_products') }} p 
+inner join {{ ref('stg_products') }} as p 
     on i.product_id = p.product_id 
+
+
 
 {% if is_incremental() %} 
     where i.last_updated > ( 
         select max(last_updated) from {{ this }} 
     ) 
+
+
 
 {% endif %} 
