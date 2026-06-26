@@ -1,23 +1,20 @@
 {{ config(materialized='view') }} 
 
-select 
-    LOAN_ID,
-    CUSTOMER_ID,
-    ACCOUNT_ID,
-    LOAN_TYPE,
-    PRINCIPAL_AMOUNT,
-    OUTSTANDING_AMOUNT,
-    INTEREST_RATE,
-    TENURE_MONTHS,
-    DISBURSED_DATE,
-    DUE_DATE,
-    STATUS,
-    BRANCH_CODE,
-    UPDATED_AT,
-    DATEDIFF(month, DISBURSED_DATE, CURRENT_DATE()) AS loan_age_months,
-      CASE 
-    WHEN status = 'overdue' THEN TRUE
-    ELSE FALSE
-  END AS is_overdue
+
+select
+    loan_id
+    , customer_id
+    , account_id
+    , loan_type
+    , principal_amount
+    , outstanding_amount
+    , interest_rate
+    , tenure_months
+    , disbursed_date
+    , due_date
+    , status
+    , branch_code
+    , updated_at
+    , datediff('month', disbursed_date::date, current_date()) as loan_age_months
+    , coalesce(status = 'overdue', false) as is_overdue
 from {{ source('loans', 'loans') }}
-where LOAN_ID is not null

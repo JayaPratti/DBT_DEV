@@ -1,15 +1,15 @@
 {{ config(materialized='view') }} 
 
 select 
-    PAYMENT_ID,
-    LOAN_ID,
-    PAYMENT_DATE,
-    EMI_AMOUNT,
-    PRINCIPAL_PAID,
-    INTEREST_PAID,
-    PENALTY_AMOUNT,
-    PAYMENT_STATUS,
-    DAYS_OVERDUE,
-    (principal_paid + interest_paid + penalty_amount) AS total_paid
+    payment_id,
+    loan_id,
+    payment_date,
+    emi_amount,
+    principal_paid,
+    interest_paid,
+    penalty_amount,
+    payment_status,
+    days_overdue,
+    (principal_paid + interest_paid + penalty_amount) as total_paid
 from {{ source('loans', 'loan_payments') }}
-where PAYMENT_ID is not null
+where payment_id is not null

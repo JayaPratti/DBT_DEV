@@ -1,13 +1,9 @@
 {{ 
-
-
     config( 
         materialized     = 'incremental', 
         unique_key       = 'transaction_date', 
         on_schema_change = 'sync_all_columns' 
     ) 
-
-
 }} 
 
 
