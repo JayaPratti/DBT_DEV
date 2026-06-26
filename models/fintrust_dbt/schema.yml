@@ -12,6 +12,10 @@ models:
         tests: 
           - not_null 
           - unique 
+      - name: full_name 
+        description: 'Derived. Concatenation of first_name and last_name.' 
+      - name: age 
+        description: 'Derived. Customer age in years calculated from date_of_birth.' 
       - name: email 
         description: 'Customer email address. Lowercased.' 
         tests: 
@@ -22,7 +26,8 @@ models:
           - accepted_values: 
               arguments: 
                 values: ['premium', 'standard'] 
-
+      - name: is_active 
+        description: 'TRUE if the customer account is currently active.'
 
   - name: stg_accounts 
     description: > 
