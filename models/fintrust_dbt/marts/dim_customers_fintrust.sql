@@ -1,6 +1,6 @@
 {{ config(materialized='table') }} 
 
-select 
+select a.account_id,
     cf.customer_id, 
     cf.full_name, 
     cf.customer_segment, 
