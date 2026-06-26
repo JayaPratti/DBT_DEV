@@ -1,14 +1,20 @@
 {{ 
+
+
     config( 
         materialized     = 'incremental', 
         unique_key       = 'transaction_date', 
         on_schema_change = 'sync_all_columns' 
     ) 
+
+
 }} 
 
 
 select 
-    transaction_date, 
+    transaction_date,  
+    current_timestamp                        as loaded_at,
+    count(distinct account_id)               as unique_accounts,
     count(transaction_id)                    as total_transactions, 
     count(case when status = 'success' 
         then 1 end)                          as successful_transactions, 
@@ -21,9 +27,7 @@ select
     sum(case when is_credit = true 
         then amount else 0 end) 
     - sum(case when is_debit = true 
-        then amount else 0 end)              as net_flow, 
-    count(distinct account_id)               as unique_accounts, 
-    current_timestamp                        as loaded_at 
+        then amount else 0 end)              as net_flow
 from {{ ref('stg_transactions') }} 
 
 

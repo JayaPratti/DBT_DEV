@@ -1,5 +1,7 @@
 {{ config(materialized='table') }} 
 
+
+
  select 
     lh.loan_id, 
     lh.customer_id, 
@@ -25,6 +27,6 @@
         when lh.is_overdue            then 'medium' 
         else                               'low' 
     end                                      as default_risk 
-from {{ ref('int_loan_health') }} lh 
-left join {{ ref('branch_master') }} b 
+from {{ ref('int_loan_health') }} as lh 
+left join {{ ref('branch_master') }} as b 
     on lh.branch_code = b.branch_code 
