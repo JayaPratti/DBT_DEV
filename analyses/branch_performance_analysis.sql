@@ -23,4 +23,4 @@ left join {{ ref('stg_accounts') }} as a
 left join {{ ref('fct_daily_transactions') }} as dt 
     on a.account_id = dt.unique_accounts 
 group by 1, 2, 3 
-order by 6 desc, 8 asc 
+order by 7 desc, 8 asc 
